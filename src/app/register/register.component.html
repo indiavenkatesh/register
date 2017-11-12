@@ -1,0 +1,88 @@
+<div class="register_form">
+  <form [formGroup]="regForm" (submit)="saveUser()">
+    <div class="form-title">
+      <h1>Registration Form</h1>
+    </div>
+    <div class="form-container">
+      <div class="alert alert-danger" *ngIf="error">
+        {{error.message}}
+      </div>
+      <div class="alert alert-success" *ngIf="success">
+        The user details are saved sucessfully!
+      </div>
+      <div class="field-row">
+        <label [ngClass]="fadeInOut('firstname')">First Name</label> 
+        <input type="text" placeholder="First Name" class="input-line" [ngClass]="errorClass('firstname')" formControlName="firstname" />
+      </div>
+      <div class="field-row">
+        <label [ngClass]="fadeInOut('lastname')">Last Name</label> 
+        <input type="text" placeholder="Last Name" class="input-line" [ngClass]="errorClass('lastname')" formControlName="lastname" />
+      </div>
+      <div class="field-row">
+        <label [ngClass]="fadeInOut('email')">Email</label> 
+        <input type="text" placeholder="Email" class="input-line" [ngClass]="errorClass('email')" formControlName="email" />
+      </div>
+      <div class="field-row">
+        <label class="fadeIn">Gender</label> 
+        <div class="button-group">
+          <button type="button" class="btn" [ngClass]="getGenderclass('M')" (click)="setGender('M')">Male</button>
+          <button type="button" class="btn" [ngClass]="getGenderclass('F')"  (click)="setGender('F')">Female</button>
+        </div>
+      </div>
+      <div class="field-row">
+        <label class="fadeIn">Hobbies</label> 
+        <div class="button-group">
+          <button type="button" [ngClass]="getHobbyclass('sports')" (click)="toggleHobby('sports')" class="btn">Sports</button>
+          <button type="button" [ngClass]="getHobbyclass('music')" (click)="toggleHobby('music')" class="btn">Music</button>
+          <button type="button" [ngClass]="getHobbyclass('cook')" (click)="toggleHobby('cook')" class="btn">Cooking</button>
+          <button type="button" [ngClass]="getHobbyclass('dance')" (click)="toggleHobby('dance')" class="btn">Dance</button>
+        </div>
+      </div>
+      <div class="field-row" formArrayName="street">
+        <div class="field-row">
+          <label class="fadeIn">Street</label> 
+          <input type="text" placeholder="Street 1" class="input-line" formControlName="0" />
+        </div>
+        <div class="field-row">
+          <input type="text" placeholder="Street 2" class="input-line" formControlName="1" />
+        </div>
+      </div>
+      <div class="field-row">
+        <label [ngClass]="fadeInOut('city')">City</label> 
+        <input type="text" placeholder="City" class="input-line" [ngClass]="errorClass('city')" formControlName="city" />
+      </div>
+      <div class="field-row">
+        <label [ngClass]="fadeInOut('country')">Country</label> 
+        <input type="text" placeholder="Country" [ngClass]="errorClass('country')" class="input-line" formControlName="country" />
+      </div>
+      <div class="field-row">
+        <label [ngClass]="fadeInOut('region')">Region</label> 
+        <input type="text" placeholder="Region" [ngClass]="errorClass('region')" class="input-line" formControlName="region" />
+      </div>
+      <div class="form-sub-title">
+        <h4>Account Details</h4>
+      </div>
+      <div class="field-row">
+        <label [ngClass]="fadeInOut('username')">Username</label> 
+        <input type="text" placeholder="Username" class="input-line" [ngClass]="errorClass('username')" formControlName="username" />
+      </div>
+      <div class="alert alert-danger" *ngIf="regForm.controls.username.errors?.pattern">
+        Only letters and numbers are allowed.
+      </div>
+      <div class="field-row">
+        <label [ngClass]="fadeInOut('password')">Password</label> 
+        <input type="password" placeholder="Password" [ngClass]="errorClass('password')" class="input-line" formControlName="password" />
+      </div>
+      <div class="field-row">
+        <label [ngClass]="fadeInOut('confirm_password')">Confirm Password</label> 
+        <input type="password" placeholder="Confirm Password" [ngClass]="errorClass('confirm_password')" class="input-line" formControlName="confirm_password" />
+      </div>
+      <div class="alert alert-danger" *ngIf="regForm.controls.confirm_password.dirty && regForm.hasError('notSame')">
+        Passwords not match
+      </div>
+    </div>
+    <div class="form-footer">
+        <button type="submit" [disabled]="regForm.invalid" class="btn btn-lg active">Submit</button>
+    </div>
+  </form>
+</div>
